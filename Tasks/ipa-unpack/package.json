@@ -1,0 +1,20 @@
+{
+  "name": "ipa-unpack",
+  "version": "1.0.300",
+  "description": "",
+  "main": "ipa-unpack.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Scott MacDougall",
+  "license": "ISC",
+  "dependencies": {
+    "@types/mocha": "^5.2.7",
+    "azure-pipelines-task-lib": "^2.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.6",
+    "@types/q": "^1.5.2",
+    "ipa-utilities": "file:../../ipa-utilities-1.0.300.tgz"
+  }
+}

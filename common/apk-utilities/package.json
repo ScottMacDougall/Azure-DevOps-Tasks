@@ -1,0 +1,18 @@
+{
+  "name": "apk-utilities",
+  "version": "1.0.300",
+  "description": "",
+  "main": "apk-utilities.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Scott MacDougall",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^13.7.7",
+    "@types/q": "^1.5.2"
+  },
+  "dependencies": {
+    "azure-pipelines-task-lib": "^2.9.3"
+  }
+}

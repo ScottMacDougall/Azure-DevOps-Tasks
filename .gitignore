@@ -1,0 +1,12 @@
+node_modules
+.vscode/*
+testData/*
+.taskkey
+.DS_Store
+*.tgz
+vss-extension.json
+Tasks/**/*.js
+common/**/*.js
+**/node_modules
+**/package-lock.json
+*.vsix
