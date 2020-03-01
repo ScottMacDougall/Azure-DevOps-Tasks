@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/mocha": "^5.2.7",
-    "azure-pipelines-task-lib": "^2.8.0",
+    "azure-pipelines-task-lib": "^2.9.3",
     "ipa-utilities": "file:../../ipa-utilities-1.0.312.tgz"
   },
   "devDependencies": {
