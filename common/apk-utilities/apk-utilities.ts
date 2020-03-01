@@ -14,40 +14,28 @@ export async function unpackApk(apkPath: string, outputPath: string, apkToolArgs
         ignoreReturnCode: true,
     };
 
-    var download = function (url: string, dest: string) {
-        var file = fs.createWriteStream(dest);
-        var request = http.get(url, function (response) {
-            if (response.statusCode == 302 && response.headers.location) {
-                download(response.headers.location, dest);
-            } else {
-                response.pipe(file).on("finish", async function () {
-                    let apktool = "apktool.jar";
-                    bash.arg("-jar");
-                    bash.arg(path.join(__dirname, apktool));
-                    bash.argIf(apkToolArgs != undefined, apkToolArgs);
-                    bash.arg("d");
-                    bash.arg(apkPath);
-                    bash.arg("-o");
-                    bash.arg(apkOutputPath);
-                    let unpackResult = await bash.exec(options);
-                    if (unpackResult != 0) {
-                        throw new Error("Unable to unpack apk");
-                    }
+    let apktoolPath = path.join(__dirname, "apktool.jar");
+    download("https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.1.jar", apktoolPath, async function () {
+        bash.arg("-jar");
+        bash.arg(apktoolPath);
+        bash.argIf(apkToolArgs != undefined, apkToolArgs);
+        bash.arg("d");
+        bash.arg(apkPath);
+        bash.arg("-o");
+        bash.arg(apkOutputPath);
+        let unpackResult = await bash.exec(options);
+        if (unpackResult != 0) {
+            throw new Error("Unable to unpack apk");
+        }
 
-                    tl.setVariable('UNPACKED_APK_PATH', apkOutputPath);
-                    console.log("UNPACKED_APK_PATH: " + tl.getVariable('UNPACKED_APK_PATH'));
+        tl.setVariable('UNPACKED_APK_PATH', apkOutputPath);
+        console.log("UNPACKED_APK_PATH: " + tl.getVariable('UNPACKED_APK_PATH'));
 
-                    tl.setVariable('UNPACKED_APK_NAME', path.basename(apkPath));
-                    console.log("UNPACKED_APK_NAME: " + tl.getVariable('UNPACKED_APK_NAME'));
+        tl.setVariable('UNPACKED_APK_NAME', path.basename(apkPath));
+        console.log("UNPACKED_APK_NAME: " + tl.getVariable('UNPACKED_APK_NAME'));
 
-                    return apkOutputPath;
-                });
-            };
-        }).on('error', function (err) {
-            throw Error("Unable to download Apktool");
-        });
-    };
-    download("https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.1.jar", path.join(__dirname, "apktool.jar"));
+        return apkOutputPath;
+    });
 
 }
 
@@ -60,25 +48,38 @@ export async function packApk(apkPath: string, apkName: string, outputPath: stri
         ignoreReturnCode: true,
     };
     let updatedApkFile = path.join(outputPath, apkName);
+    let apktoolPath = path.join(__dirname, "apktool.jar");
+    download("https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.1.jar", apktoolPath, async function () {
+        bash.arg("-jar");
+        bash.arg(apktoolPath);
+        bash.argIf(apkToolArgs != undefined, apkToolArgs);
+        bash.arg("b");
+        bash.arg(apkPath);
+        bash.arg("-o");
+        bash.arg(updatedApkFile);
+        let packResult = await bash.exec(options);
+        if (packResult != 0) {
+            throw new Error("Unable to pack apk");
+        }
+        tl.setVariable('REPACKAGED_APK_FILE', updatedApkFile);
+        console.log("REPACKAGED_APK_FILE: " + tl.getVariable('REPACKAGED_APK_FILE'));
 
-    let apktool = "apktool.jar";
-    bash.arg("-jar");
-    bash.arg(path.join(__dirname, apktool));
-    bash.argIf(apkToolArgs != undefined, apkToolArgs);
-    bash.arg("b");
-    bash.arg(apkPath);
-    bash.arg("-o");
-    bash.arg(updatedApkFile);
-    let packResult = await bash.exec(options);
-    if (packResult != 0) {
-        throw new Error("Unable to pack apk");
-    }
-    tl.setVariable('REPACKAGED_APK_FILE', updatedApkFile);
-    console.log("REPACKAGED_APK_FILE: " + tl.getVariable('REPACKAGED_APK_FILE'));
-
-    return updatedApkFile;
+        return updatedApkFile;
+    });
 }
 
+export function download(url: string, dest: string, callback: Function) {
+    var file = fs.createWriteStream(dest);
+    var request = http.get(url, function (response) {
+        if (response.statusCode == 302 && response.headers.location) {
+            download(response.headers.location, dest, callback);
+        } else {
+            response.pipe(file).on("finish", callback());
+        };
+    }).on('error', function (err) {
+        throw Error("Unable to download Apktool");
+    });
+};
 export function findMatchExactlyOne(defaultRoot: string, pattern: string): string {
     let files: Array<string> = tl.findMatch(defaultRoot, pattern);
 
