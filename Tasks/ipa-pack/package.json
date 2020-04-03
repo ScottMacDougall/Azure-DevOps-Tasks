@@ -1,6 +1,6 @@
 {
   "name": "ipa-pack",
-  "version": "1.0.300",
+  "version": "1.0.323",
   "description": "",
   "main": "ipa-pack.js",
   "scripts": {
@@ -15,6 +15,6 @@
   "devDependencies": {
     "@types/node": "^12.6.6",
     "@types/q": "^1.5.2",
-    "ipa-utilities": "file:../../ipa-utilities-1.0.300.tgz"
+    "ipa-utilities": "file:../../ipa-utilities-1.0.323.tgz"
   }
 }

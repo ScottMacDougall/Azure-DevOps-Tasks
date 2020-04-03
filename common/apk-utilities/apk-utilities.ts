@@ -39,14 +39,13 @@ export async function unpackApk(apkPath: string, outputPath: string, apkToolArgs
 }
 
 export async function packApk(apkPath: string, apkName: string, outputPath: string, apkToolArgs: string | undefined) {
-    let apkRepackOutputPath = path.join(outputPath, "output");
+    let apkRepackOutputPath = path.join(outputPath, "output", apkName);
     let bash: tr.ToolRunner = tl.tool(tl.which("java", true));
     let options = <tr.IExecOptions>{
         cwd: __dirname,
         failOnStdErr: false,
         ignoreReturnCode: true,
     };
-    let updatedApkFile = path.join(outputPath, apkName);
 
     let apktool = "apktool.jar";
     bash.arg("-jar");
@@ -55,15 +54,17 @@ export async function packApk(apkPath: string, apkName: string, outputPath: stri
     bash.arg("b");
     bash.arg(apkPath);
     bash.arg("-o");
-    bash.arg(updatedApkFile);
+    bash.arg(apkRepackOutputPath);
+    bash.addListener("stdout", (output: any) => console.log(output.toString()));
+
     let packResult = await bash.exec(options);
     if (packResult != 0) {
         throw new Error("Unable to pack apk");
     }
-    tl.setVariable('REPACKAGED_APK_FILE', updatedApkFile);
+    tl.setVariable('REPACKAGED_APK_FILE', apkRepackOutputPath);
     console.log("REPACKAGED_APK_FILE: " + tl.getVariable('REPACKAGED_APK_FILE'));
 
-    return updatedApkFile;
+    return apkRepackOutputPath;
 }
 
 export function findMatchExactlyOne(defaultRoot: string, pattern: string): string {
