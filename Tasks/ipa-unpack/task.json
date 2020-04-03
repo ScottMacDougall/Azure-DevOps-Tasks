@@ -9,7 +9,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": "#{BUILDID}#"
+        "Patch": 322
     },
     "instanceNameFormat": "Unpack ipa file",
     "demands": [

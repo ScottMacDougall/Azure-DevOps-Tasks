@@ -1,6 +1,6 @@
 {
   "name": "apk-pack",
-  "version": "1.0.300",
+  "version": "1.0.323",
   "main": "apk-pack.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,7 @@
   "devDependencies": {
     "@types/node": "^12.12.29",
     "@types/q": "^1.5.2",
-    "apk-utilities": "file:../../apk-utilities-1.0.300.tgz"
+    "apk-utilities": "file:../../apk-utilities-1.0.323.tgz"
   },
   "description": ""
 }

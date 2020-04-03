@@ -9,7 +9,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": "#{BUILDID}#"
+        "Patch": 322
     },
     "instanceNameFormat": "Repack ipa file",
     "demands": [
@@ -28,7 +28,7 @@
             "name": "ipaName",
             "type": "string",
             "label": "IPA Name",
-            "defaultValue": "repackaged.ipa",
+            "defaultValue": "$(UNPACKED_IPA_NAME)",
             "required": true,
             "helpMarkDown": "The name you'd like to give the newly packaged ipa."
         }
