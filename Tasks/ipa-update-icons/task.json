@@ -9,7 +9,7 @@
     "version": {
         "Major": 1,
         "Minor": 0,
-        "Patch": 322
+        "Patch": "#{BUILDID}#"
     },
     "instanceNameFormat": "Update iOS App Icons",
     "demands": [

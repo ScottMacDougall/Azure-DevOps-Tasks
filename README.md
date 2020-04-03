@@ -4,7 +4,7 @@ Collection of Azure DevOps Tasks for manipulating .apk and .ipa files
 
 ## iOS
 ### Unpack IPA Task
-![unpack ipa task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/art/unpack-ipa.png)
+![unpack ipa task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/raw/master/art/unpack-ipa.png)
 
 This task unpacks a .ipa file so that you can make modifications to it before repackaging, and re-signing it again.
 
@@ -18,7 +18,7 @@ This task unpacks a .ipa file so that you can make modifications to it before re
 Output variables values can be found in the console log of the task.
 
 ### Repack IPA Task
-![repack ipa task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/art/repack-ipa.png)
+![repack ipa task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/raw/master/art/repack-ipa.png)
 
 This task repackages a .ipa file. Note: You will have to re-sign the .ipa file after repackaging.
 
@@ -32,8 +32,8 @@ This task repackages a .ipa file. Note: You will have to re-sign the .ipa file a
 Output variables values can be found in the console log of the task.
 
 ### Update iOS App Icon Task
-![Update iOS Ap Icon (Source) task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/art/update-ios-icon-source.png)
-![Update iOS Ap Icon (IPA) task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/art/update-ios-icon-ipa.png)
+![Update iOS Ap Icon (Source) task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/raw/master/art/update-ios-icon-source.png)
+![Update iOS Ap Icon (IPA) task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/raw/master/art/update-ios-icon-ipa.png)
 
 This task will update the App Icon in the Assets.xcasset folder in your source code.
 
@@ -58,8 +58,8 @@ You should copy your original Assets.xcasset folder into your Artifact Staging D
 ## Android
 
 ### Unpack APK Task
-![unpack apk task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/art/unpack-apk.png)
-![pack apk task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/art/pack-apk.png)
+![unpack apk task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/raw/master/art/unpack-apk.png)
+![pack apk task](https://github.com/ScottMacDougall/Azure-DevOps-Tasks/raw/master/art/pack-apk.png)
 
 This task packs, or unpacks an .apk file so that you can make modifications to it.
 
